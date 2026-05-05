@@ -43,11 +43,14 @@ jobs:
           cache: "pip"
           cache-dependency-path: examples/06_netauto_ecosystem/05_ios_upgrade_project/04_python_orchestrator_netbox_inventory_workflow/requirements.txt
 
-      - name: Install dependencies
+      - name: Install project dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install ruff yamllint
+
+      - name: Install CI tools
+        run: |
+          pip install ruff yamllint pytest pyyaml
 
       - name: Python syntax compile check
         run: |
@@ -65,3 +68,8 @@ jobs:
       - name: YAML lint
         run: |
           yamllint .
+
+      - name: Offline pytest checks
+        run: |
+          pytest -q tests/offline
+
