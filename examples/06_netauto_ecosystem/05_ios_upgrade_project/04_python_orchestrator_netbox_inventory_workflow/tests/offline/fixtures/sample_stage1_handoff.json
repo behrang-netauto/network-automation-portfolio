@@ -1,0 +1,16 @@
+{
+  "run_id": "20260501T120000Z",
+  "image": {
+    "filename": "cat9k_iosxe.bin"
+  },
+  "devices": [
+    {
+      "inventory_hostname": "R1",
+      "host": "192.0.2.10",
+      "port": 22,
+      "os": "iosxe",
+      "platform": "cat9k",
+      "status": "READY_FOR_RELOAD"
+    }
+  ]
+}
