@@ -7,12 +7,15 @@
 # Python
 __pycache__/
 *.pyc
+.pytest_cache/
 .venv/
 venv/
+examples/**/.venv-ansible/
 
 # Outputs/logs
 examples/**/output/
 examples/**/outputs/
+examples/**/evidence_pack/**/running_config_backups/*.cfg
 **/logs/
 **/snapshots/
 *.log
