@@ -1,0 +1,15 @@
+---
+netconf_checks:
+  - name: hostname_native
+    description: "Read IOS XE hostname using Cisco-IOS-XE-native YANG model"
+    filter: |
+      <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+        <hostname/>
+      </native>
+    output_file: "netconf_hostname_get.xml"
+
+  - name: interfaces_state
+    description: "Read interface state using IETF interfaces YANG model"
+    filter: |
+      <interfaces-state xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"/>
+    output_file: "netconf_interfaces_state.xml"

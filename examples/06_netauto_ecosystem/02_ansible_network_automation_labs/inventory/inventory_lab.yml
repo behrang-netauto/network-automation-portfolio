@@ -36,3 +36,15 @@ all:
               ansible_host: 192.168.2.66
               platform: nxos
               device_model: nxosv
+
+        iosxe_netconf:
+          vars:
+            ansible_connection: ansible.netcommon.netconf
+            ansible_network_os: cisco.ios.ios
+            ansible_port: 830
+
+          hosts:
+            csr1000v_netconf:
+              ansible_host: 192.168.2.64
+              platform: iosxe
+              device_model: csr1000v

@@ -75,6 +75,7 @@ jobs:
           ansible-doc -t module cisco.ios.ios_command >/dev/null
           ansible-doc -t module cisco.ios.ios_config >/dev/null
           ansible-doc -t module cisco.nxos.nxos_command >/dev/null
+          ansible-doc -t module ansible.netcommon.netconf_get >/dev/null
 
       - name: Python syntax compile check
         run: |
@@ -110,6 +111,11 @@ jobs:
             -i inventory/inventory_lab.yml \
             --vault-password-file ~/.ansible/vault_pass.txt \
             --graph | grep -q "@nxos"
+
+          ansible-inventory \
+            -i inventory/inventory_lab.yml \
+            --vault-password-file ~/.ansible/vault_pass.txt \
+            --graph | grep -q "@iosxe_netconf"
 
           ansible-inventory \
             -i inventory/inventory_lab.yml \

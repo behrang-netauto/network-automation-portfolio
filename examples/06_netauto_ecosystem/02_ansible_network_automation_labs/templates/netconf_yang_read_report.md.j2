@@ -1,0 +1,125 @@
+# NETCONF/YANG Read Report
+
+Run ID: `{{ run_id }}`
+
+This playbook validates a read-only NETCONF path using `ansible.netcommon.netconf_get`.
+
+Report file:
+`{{ evidence_root_effective }}/rendered_configs/{{ run_id }}/netconf_yang_read_report.md`
+
+## Summary
+
+| Host alias | Management IP | Connection | Port | Check name | Status | Output path | Error |
+|---|---|---|---:|---|---|---|---|
+{% for host in groups['iosxe_netconf'] | default([]) %}
+{% set host_ip = hostvars[host].ansible_host | default('n/a') %}
+{% set host_conn = hostvars[host].ansible_connection | default('n/a') %}
+{% set host_port = hostvars[host].ansible_port | default('n/a') %}
+
+{% if hostvars[host].netconf_get_results is not defined %}
+| {{ host }} | {{ host_ip }} | {{ host_conn }} | {{ host_port }} | n/a | failed | n/a | Host unreachable or NETCONF checks did not run |
+{% else %}
+{% for result in hostvars[host].netconf_get_results.results | default([]) %}
+{% set is_failed = result.failed | default(false) %}
+{% set has_output = result.output is defined and (result.output | trim | length > 0) %}
+
+{% if is_failed %}
+{% set status = 'failed' %}
+{% set out_path = 'n/a' %}
+{% set err = result.msg | default('no error message collected') %}
+{% elif not has_output %}
+{% set status = 'no_data' %}
+{% set out_path = 'n/a' %}
+{% set err = 'NETCONF RPC returned no output' %}
+{% else %}
+{% set status = 'ok' %}
+{% set out_path = evidence_root_effective ~ '/command_outputs/' ~ run_id ~ '/' ~ host ~ '/' ~ result.item.output_file %}
+{% set err = '' %}
+{% endif %}
+
+| {{ host }} | {{ host_ip }} | {{ host_conn }} | {{ host_port }} | {{ result.item.name }} | {{ status }} | {% if out_path == 'n/a' %}n/a{% else %}`{{ out_path }}`{% endif %} | {{ err }} |
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+## Checks
+
+{% for host in groups['iosxe_netconf'] | default([]) %}
+{% if hostvars[host].netconf_get_results is not defined %}
+### Host unreachable
+
+Host alias: `{{ host }}`
+
+Status: `failed`
+
+Output file:
+
+`n/a`
+
+Error:
+
+```text
+Host unreachable or NETCONF checks did not run.
+```
+
+{% else %}
+{% for result in hostvars[host].netconf_get_results.results | default([]) %}
+{% set is_failed = result.failed | default(false) %}
+{% set has_output = result.output is defined and (result.output | trim | length > 0) %}
+
+{% if is_failed %}
+{% set status = 'failed' %}
+{% set out_path = 'n/a' %}
+{% set err = result.msg | default('no error message collected') %}
+{% elif not has_output %}
+{% set status = 'no_data' %}
+{% set out_path = 'n/a' %}
+{% set err = 'NETCONF RPC completed but returned no output.' %}
+{% else %}
+{% set status = 'ok' %}
+{% set out_path = evidence_root_effective ~ '/command_outputs/' ~ run_id ~ '/' ~ host ~ '/' ~ result.item.output_file %}
+{% set err = '' %}
+{% endif %}
+
+### {{ result.item.name }}
+
+Host alias: `{{ host }}`
+
+Description:
+
+{{ result.item.description | default('No description provided.') }}
+
+Status: `{{ status }}`
+
+Output file:
+
+{% if out_path == 'n/a' %}
+`n/a`
+{% else %}
+`{{ out_path }}`
+{% endif %}
+
+{% if status == 'failed' %}
+Error:
+
+```text
+{{ err }}
+```
+{% elif status == 'no_data' %}
+Note:
+
+```text
+{{ err }}
+```
+{% endif %}
+
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+## Notes
+
+- Design: data-driven list of NETCONF checks from `netconf_checks`
+- Mechanism: NETCONF connection with YANG-modeled read operations
+- Operation: `ansible.netcommon.netconf_get`
+- Scope: read-only validation, no NETCONF configuration push

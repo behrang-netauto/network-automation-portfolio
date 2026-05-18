@@ -20,7 +20,7 @@ def test_inventory_has_expected_groups():
     network_children = children["network_devices"]["children"]
     assert "ios" in network_children
     assert "nxos" in network_children
-
+    assert "iosxe_netconf" in network_children
 
 def test_ios_inventory_shape():
     inventory = load_inventory()
@@ -59,6 +59,23 @@ def test_nxos_inventory_shape():
         assert "platform" in host_vars, f"{host_name} must define platform"
         assert "device_model" in host_vars, f"{host_name} must define device_model"
 
+def test_iosxe_netconf_inventory_shape():
+    inventory = load_inventory()
+    netconf_group = inventory["all"]["children"]["network_devices"]["children"]["iosxe_netconf"]
+
+    netconf_vars = netconf_group["vars"]
+    netconf_hosts = netconf_group["hosts"]
+
+    assert netconf_vars["ansible_connection"] == "ansible.netcommon.netconf"
+    assert netconf_vars["ansible_network_os"] == "cisco.ios.ios"
+    assert netconf_vars["ansible_port"] == 830
+
+    assert set(netconf_hosts) == {"csr1000v_netconf"}
+
+    host_vars = netconf_hosts["csr1000v_netconf"]
+    assert host_vars["ansible_host"] == "192.168.2.64"
+    assert host_vars["platform"] == "iosxe"
+    assert host_vars["device_model"] == "csr1000v"
 
 def test_network_devices_use_paramiko_backend():
     inventory = load_inventory()
