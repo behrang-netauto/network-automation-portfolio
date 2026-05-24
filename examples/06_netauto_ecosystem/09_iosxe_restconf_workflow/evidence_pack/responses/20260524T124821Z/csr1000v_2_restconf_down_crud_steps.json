@@ -1,0 +1,19 @@
+{
+  "device": "CSR1000v-2-restconf-down",
+  "host": "192.168.2.64",
+  "workflow": "loopback_crud",
+  "final_status": "SKIPPED_RESTCONF_UNAVAILABLE",
+  "steps": [
+    {
+      "name": "health_check",
+      "method": "GET",
+      "endpoint": "ietf-yang-library:modules-state/module-set-id",
+      "status": "FAILED_HTTP",
+      "http_status": null,
+      "error": "HTTPSConnectionPool(host='192.168.2.64', port=443): Max retries exceeded with url: /restconf/data/ietf-yang-library:modules-state/module-set-id (Caused by NewConnectionError(\"HTTPSConnection(host='192.168.2.64', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+    }
+  ],
+  "created_by_script": false,
+  "cleanup_attempted": false,
+  "cleanup_status": null
+}

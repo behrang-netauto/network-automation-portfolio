@@ -1,0 +1,6 @@
+{
+  "Cisco-IOS-XE-native:Loopback": {
+    "name": 123,
+    "description": "RESTCONF updated description"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "device": "CSR1000v-1",
+  "host": "192.168.2.63",
+  "workflow": "loopback_crud",
+  "final_status": "OK",
+  "steps": [
+    {
+      "name": "health_check",
+      "method": "GET",
+      "endpoint": "ietf-yang-library:modules-state/module-set-id",
+      "status": "OK",
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "name": "check_preexisting_loopback",
+      "method": "GET",
+      "endpoint": "Cisco-IOS-XE-native:native/interface/Loopback=123",
+      "status": "FAILED_HTTP",
+      "http_status": 404,
+      "error": ""
+    },
+    {
+      "name": "create_loopback",
+      "method": "PUT",
+      "endpoint": "Cisco-IOS-XE-native:native/interface/Loopback=123",
+      "status": "NO_DATA",
+      "http_status": 201,
+      "error": null
+    },
+    {
+      "name": "read_after_create",
+      "method": "GET",
+      "endpoint": "Cisco-IOS-XE-native:native/interface/Loopback=123",
+      "status": "OK",
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "name": "update_description_patch",
+      "method": "PATCH",
+      "endpoint": "Cisco-IOS-XE-native:native/interface/Loopback=123",
+      "status": "NO_DATA",
+      "http_status": 204,
+      "error": null
+    },
+    {
+      "name": "read_after_update",
+      "method": "GET",
+      "endpoint": "Cisco-IOS-XE-native:native/interface/Loopback=123",
+      "status": "OK",
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "name": "delete_loopback",
+      "method": "DELETE",
+      "endpoint": "Cisco-IOS-XE-native:native/interface/Loopback=123",
+      "status": "NO_DATA",
+      "http_status": 204,
+      "error": null
+    },
+    {
+      "name": "read_after_delete",
+      "method": "GET",
+      "endpoint": "Cisco-IOS-XE-native:native/interface/Loopback=123",
+      "status": "OK",
+      "http_status": 404,
+      "error": "",
+      "expected_not_found": true
+    }
+  ],
+  "created_by_script": true,
+  "cleanup_attempted": true,
+  "cleanup_status": "OK"
+}

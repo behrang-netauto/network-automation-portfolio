@@ -1,0 +1,9 @@
+! IOS XE RESTCONF enablement reference
+! Apply only to devices that are expected to be RESTCONF available.
+
+conf t
+ip http secure-server
+ip http authentication local
+restconf
+end
+write memory

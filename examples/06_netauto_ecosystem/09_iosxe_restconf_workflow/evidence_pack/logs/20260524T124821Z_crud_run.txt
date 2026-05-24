@@ -1,0 +1,42 @@
+Run ID: 20260524T124821Z
+Workflow: loopback_crud
+
+CSR1000v-1 (192.168.2.63): OK
+  created_by_script: True
+  cleanup_attempted: True
+  cleanup_status: OK
+  - health_check: OK http=200 error=None
+  - check_preexisting_loopback: FAILED_HTTP http=404 error=
+  - create_loopback: NO_DATA http=201 error=None
+  - read_after_create: OK http=200 error=None
+  - update_description_patch: NO_DATA http=204 error=None
+  - read_after_update: OK http=200 error=None
+  - delete_loopback: NO_DATA http=204 error=None
+  - read_after_delete: OK http=404 error=
+
+CSR1000v-2-restconf-down (192.168.2.64): SKIPPED_RESTCONF_UNAVAILABLE
+  created_by_script: False
+  cleanup_attempted: False
+  cleanup_status: None
+  - health_check: FAILED_HTTP http=None error=HTTPSConnectionPool(host='192.168.2.64', port=443): Max retries exceeded with url: /restconf/data/ietf-yang-library:modules-state/module-set-id (Caused by NewConnectionError("HTTPSConnection(host='192.168.2.64', port=443): Failed to establish a new connection: [Errno 111] Connection refused"))
+
+CSR1000v-3-preexisting (192.168.2.65): SKIPPED_PREEXISTING_RESOURCE
+  created_by_script: False
+  cleanup_attempted: False
+  cleanup_status: None
+  - health_check: OK http=200 error=None
+  - check_preexisting_loopback: OK http=200 error=None
+
+CSR1000v-4 (192.168.2.66): OK
+  created_by_script: True
+  cleanup_attempted: True
+  cleanup_status: OK
+  - health_check: OK http=200 error=None
+  - check_preexisting_loopback: FAILED_HTTP http=404 error=
+  - create_loopback: NO_DATA http=201 error=None
+  - read_after_create: OK http=200 error=None
+  - update_description_patch: NO_DATA http=204 error=None
+  - read_after_update: OK http=200 error=None
+  - delete_loopback: NO_DATA http=204 error=None
+  - read_after_delete: OK http=404 error=
+

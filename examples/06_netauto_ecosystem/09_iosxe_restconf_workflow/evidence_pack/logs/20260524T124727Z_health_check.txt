@@ -1,0 +1,18 @@
+Run ID: 20260524T124727Z
+Workflow: restconf_health_check
+
+CSR1000v-1 (192.168.2.63): RESTCONF_AVAILABLE
+  - health_check: OK http=200 error=None
+  - native_interface_read: OK http=200 error=None
+
+CSR1000v-2-restconf-down (192.168.2.64): FAILED_HTTP
+  - health_check: FAILED_HTTP http=None error=HTTPSConnectionPool(host='192.168.2.64', port=443): Max retries exceeded with url: /restconf/data/ietf-yang-library:modules-state/module-set-id (Caused by NewConnectionError("HTTPSConnection(host='192.168.2.64', port=443): Failed to establish a new connection: [Errno 111] Connection refused"))
+
+CSR1000v-3-preexisting (192.168.2.65): RESTCONF_AVAILABLE
+  - health_check: OK http=200 error=None
+  - native_interface_read: OK http=200 error=None
+
+CSR1000v-4 (192.168.2.66): RESTCONF_AVAILABLE
+  - health_check: OK http=200 error=None
+  - native_interface_read: OK http=200 error=None
+
