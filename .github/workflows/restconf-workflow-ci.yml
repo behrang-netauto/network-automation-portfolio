@@ -1,0 +1,71 @@
+name: restconf-workflow-ci
+
+on:
+  push:
+    branches:
+      - main
+      - "feature/**"
+    paths:
+      - ".github/workflows/restconf-workflow-ci.yml"
+      - "examples/06_netauto_ecosystem/09_iosxe_restconf_workflow/**"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/restconf-workflow-ci.yml"
+      - "examples/06_netauto_ecosystem/09_iosxe_restconf_workflow/**"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: examples/06_netauto_ecosystem/09_iosxe_restconf_workflow
+
+jobs:
+  offline-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout relevant paths
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github/workflows
+            examples/06_netauto_ecosystem/09_iosxe_restconf_workflow
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: examples/06_netauto_ecosystem/09_iosxe_restconf_workflow/requirements.txt
+
+      - name: Install project dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Python syntax compile check
+        run: |
+          python -m compileall src scripts tests
+
+      - name: Dry-run import checks
+        run: |
+          python -c "from src.restconf_client import RestconfClient; print('RestconfClient import OK')"
+
+      - name: Ruff lint
+        run: |
+          ruff check .
+
+      - name: YAML lint
+        run: |
+          yamllint .
+
+      - name: Offline pytest checks
+        run: |
+          pytest -q tests/offline

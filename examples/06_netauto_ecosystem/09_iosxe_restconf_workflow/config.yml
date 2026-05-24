@@ -1,0 +1,43 @@
+defaults:
+  scheme: https
+  port: 443
+  verify_ssl: false
+
+auth:
+  username: test
+  password_env: IOSXE_RESTCONF_PASSWORD
+
+restconf:
+  base_path: /restconf/data
+  health_endpoint: ietf-yang-library:modules-state/module-set-id
+  native_interface_endpoint: Cisco-IOS-XE-native:native/interface
+  health_timeout_sec: 5
+  request_timeout_sec: 15
+
+execution:
+  max_workers: 5
+
+lab_object:
+  loopback_id: 123
+  loopback_name: Loopback123
+  description_create: RESTCONF managed test interface
+  description_update: RESTCONF updated description
+  ipv4_address: 10.123.123.1
+  ipv4_mask: 255.255.255.255
+
+evidence:
+  root: evidence_pack
+  run_id_policy: generate
+
+devices:
+  - name: CSR1000v-1
+    host: 192.168.2.63
+
+  - name: CSR1000v-2-restconf-down
+    host: 192.168.2.64
+
+  - name: CSR1000v-3-preexisting
+    host: 192.168.2.65
+
+  - name: CSR1000v-4
+    host: 192.168.2.66

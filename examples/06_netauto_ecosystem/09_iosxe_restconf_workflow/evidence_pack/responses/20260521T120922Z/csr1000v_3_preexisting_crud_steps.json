@@ -1,0 +1,27 @@
+{
+  "device": "CSR1000v-3-preexisting",
+  "host": "192.168.2.65",
+  "workflow": "loopback_crud",
+  "final_status": "SKIPPED_PREEXISTING_RESOURCE",
+  "steps": [
+    {
+      "name": "health_check",
+      "method": "GET",
+      "endpoint": "ietf-yang-library:modules-state/module-set-id",
+      "status": "OK",
+      "http_status": 200,
+      "error": null
+    },
+    {
+      "name": "check_preexisting_loopback",
+      "method": "GET",
+      "endpoint": "Cisco-IOS-XE-native:native/interface/Loopback=123",
+      "status": "OK",
+      "http_status": 200,
+      "error": null
+    }
+  ],
+  "created_by_script": false,
+  "cleanup_attempted": false,
+  "cleanup_status": null
+}

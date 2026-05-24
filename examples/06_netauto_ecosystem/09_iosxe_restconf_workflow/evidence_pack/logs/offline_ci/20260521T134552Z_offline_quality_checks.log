@@ -1,0 +1,19 @@
+Run ID: 20260521T134552Z
+Workflow: local offline quality checks
+
+== python compileall ==
+Listing 'src'...
+Listing 'scripts'...
+Listing 'tests'...
+Listing 'tests/offline'...
+
+== ruff check ==
+All checks passed!
+
+== yamllint ==
+
+== pytest offline ==
+........                                                                 [100%]
+8 passed in 0.18s
+
+Result: PASS

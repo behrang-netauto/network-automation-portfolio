@@ -1,0 +1,94 @@
+{
+  "run_id": "20260521T120451Z",
+  "workflow": "restconf_health_check",
+  "results": [
+    {
+      "device": "CSR1000v-1",
+      "host": "192.168.2.63",
+      "workflow": "restconf_health_check",
+      "final_status": "RESTCONF_AVAILABLE",
+      "steps": [
+        {
+          "name": "health_check",
+          "method": "GET",
+          "endpoint": "ietf-yang-library:modules-state/module-set-id",
+          "status": "OK",
+          "http_status": 200,
+          "error": null
+        },
+        {
+          "name": "native_interface_read",
+          "method": "GET",
+          "endpoint": "Cisco-IOS-XE-native:native/interface",
+          "status": "OK",
+          "http_status": 200,
+          "error": null
+        }
+      ]
+    },
+    {
+      "device": "CSR1000v-2-restconf-down",
+      "host": "192.168.2.64",
+      "workflow": "restconf_health_check",
+      "final_status": "FAILED_HTTP",
+      "steps": [
+        {
+          "name": "health_check",
+          "method": "GET",
+          "endpoint": "ietf-yang-library:modules-state/module-set-id",
+          "status": "FAILED_HTTP",
+          "http_status": null,
+          "error": "HTTPSConnectionPool(host='192.168.2.64', port=443): Max retries exceeded with url: /restconf/data/ietf-yang-library:modules-state/module-set-id (Caused by NewConnectionError(\"HTTPSConnection(host='192.168.2.64', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+        }
+      ]
+    },
+    {
+      "device": "CSR1000v-3-preexisting",
+      "host": "192.168.2.65",
+      "workflow": "restconf_health_check",
+      "final_status": "RESTCONF_AVAILABLE",
+      "steps": [
+        {
+          "name": "health_check",
+          "method": "GET",
+          "endpoint": "ietf-yang-library:modules-state/module-set-id",
+          "status": "OK",
+          "http_status": 200,
+          "error": null
+        },
+        {
+          "name": "native_interface_read",
+          "method": "GET",
+          "endpoint": "Cisco-IOS-XE-native:native/interface",
+          "status": "OK",
+          "http_status": 200,
+          "error": null
+        }
+      ]
+    },
+    {
+      "device": "CSR1000v-4",
+      "host": "192.168.2.66",
+      "workflow": "restconf_health_check",
+      "final_status": "RESTCONF_AVAILABLE",
+      "steps": [
+        {
+          "name": "health_check",
+          "method": "GET",
+          "endpoint": "ietf-yang-library:modules-state/module-set-id",
+          "status": "OK",
+          "http_status": 200,
+          "error": null
+        },
+        {
+          "name": "native_interface_read",
+          "method": "GET",
+          "endpoint": "Cisco-IOS-XE-native:native/interface",
+          "status": "OK",
+          "http_status": 200,
+          "error": null
+        }
+      ]
+    }
+  ]
+}
