@@ -1,0 +1,40 @@
+---
+all:
+  children:
+    network_devices:
+      children:
+%{ for context in execution_contexts ~}
+        ${context}:
+          vars:
+%{ if context == "ios" ~}
+            ansible_connection: ansible.netcommon.network_cli
+            ansible_network_os: cisco.ios.ios
+            ansible_become: true
+            ansible_become_method: enable
+%{ endif ~}
+%{ if context == "nxos" ~}
+            ansible_connection: ansible.netcommon.network_cli
+            ansible_network_os: cisco.nxos.nxos
+%{ endif ~}
+%{ if context == "iosxe_netconf" ~}
+            ansible_connection: ansible.netcommon.netconf
+            ansible_network_os: cisco.ios.ios
+%{ endif ~}
+          hosts:
+%{ for name, device in inventory_devices ~}
+%{ if device.execution_context == context ~}
+            ${name}:
+              ansible_host: ${device.mgmt_ip}
+              platform: ${device.platform}
+              device_model: ${device.device_model}
+              role: ${device.role}
+%{ if context == "iosxe_netconf" ~}
+              ansible_port: ${device.netconf.port}
+%{ endif ~}
+              restconf_supported: ${device.restconf.supported}
+              restconf_enabled: ${device.restconf.enabled}
+              netconf_supported: ${device.netconf.supported}
+              netconf_enabled: ${device.netconf.enabled}
+%{ endif ~}
+%{ endfor ~}
+%{ endfor ~}

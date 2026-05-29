@@ -1,0 +1,18 @@
+---
+site:
+  name: "${site_name}"
+
+devices:
+%{ for name, device in netbox_devices ~}
+  - name: "${name}"
+    role: "${device.role}"
+    platform: "${device.platform}"
+    device_model: "${device.device_model}"
+    management_ip: "${device.mgmt_ip}"
+    execution_context: "${device.execution_context}"
+    custom_fields:
+      restconf_supported: ${device.restconf.supported}
+      restconf_enabled: ${device.restconf.enabled}
+      netconf_supported: ${device.netconf.supported}
+      netconf_enabled: ${device.netconf.enabled}
+%{ endfor ~}

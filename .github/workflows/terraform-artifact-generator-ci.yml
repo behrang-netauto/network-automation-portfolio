@@ -1,0 +1,68 @@
+---
+name: Terraform Artifact Generator CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/terraform-artifact-generator-ci.yml"
+      - "examples/06_netauto_ecosystem/10_terraform_network_artifact_generator/**"
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: examples/06_netauto_ecosystem/10_terraform_network_artifact_generator
+
+jobs:
+  terraform-artifact-generator-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github/workflows
+            examples/06_netauto_ecosystem/10_terraform_network_artifact_generator
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.15.4"
+
+      - name: Show Terraform version
+        run: |
+          terraform version
+
+      - name: Check Terraform formatting
+        run: |
+          terraform fmt -check
+
+      - name: Initialize Terraform
+        run: |
+          terraform init -input=false
+
+      - name: Validate Terraform configuration
+        run: |
+          terraform validate
+
+      - name: Run Terraform plan
+        run: |
+          terraform plan -input=false -no-color
+
+      - name: Regenerate local artifacts
+        run: |
+          terraform apply -auto-approve -input=false -no-color
+
+      - name: Verify generated artifacts are committed
+        run: |
+          git diff --exit-code -- generated
+          test -z "$(git status --short -- generated)"
+
+      - name: List committed generated artifacts
+        run: |
+          find generated -type f | sort

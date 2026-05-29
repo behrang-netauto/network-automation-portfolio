@@ -1,0 +1,43 @@
+---
+inventory:
+  source: "terraform-generated"
+  site: "lab-primary"
+
+auth:
+  username_env: "IOSXE_RESTCONF_USER"
+  password_env: "IOSXE_RESTCONF_PASSWORD"
+
+restconf:
+  scheme: "https"
+  verify_ssl: false
+  timeout: 20
+  base_path: "/restconf/data"
+
+execution:
+  per_device_failure_isolation: true
+
+evidence:
+  root: "evidence_pack"
+
+devices:
+  - name: "csr1000v_1"
+    host: "192.168.2.63"
+    platform: "iosxe"
+    device_model: "csr1000v"
+    restconf:
+      enabled: true
+      port: 443
+  - name: "csr1000v_3"
+    host: "192.168.2.65"
+    platform: "iosxe"
+    device_model: "csr1000v"
+    restconf:
+      enabled: true
+      port: 443
+  - name: "csr1000v_4"
+    host: "192.168.2.66"
+    platform: "iosxe"
+    device_model: "csr1000v"
+    restconf:
+      enabled: true
+      port: 443

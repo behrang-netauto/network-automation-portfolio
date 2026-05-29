@@ -1,0 +1,86 @@
+---
+all:
+  children:
+    network_devices:
+      children:
+        ios:
+          vars:
+            ansible_connection: ansible.netcommon.network_cli
+            ansible_network_os: cisco.ios.ios
+            ansible_become: true
+            ansible_become_method: enable
+          hosts:
+            csr1000v_1:
+              ansible_host: 192.168.2.63
+              platform: iosxe
+              device_model: csr1000v
+              role: router
+              restconf_supported: true
+              restconf_enabled: true
+              netconf_supported: true
+              netconf_enabled: false
+            csr1000v_2:
+              ansible_host: 192.168.2.64
+              platform: iosxe
+              device_model: csr1000v
+              role: router
+              restconf_supported: true
+              restconf_enabled: false
+              netconf_supported: true
+              netconf_enabled: false
+            csr1000v_3:
+              ansible_host: 192.168.2.65
+              platform: iosxe
+              device_model: csr1000v
+              role: router
+              restconf_supported: true
+              restconf_enabled: true
+              netconf_supported: true
+              netconf_enabled: false
+            csr1000v_4:
+              ansible_host: 192.168.2.66
+              platform: iosxe
+              device_model: csr1000v
+              role: router
+              restconf_supported: true
+              restconf_enabled: true
+              netconf_supported: true
+              netconf_enabled: false
+            iol_r1:
+              ansible_host: 192.168.2.69
+              platform: ios
+              device_model: iol
+              role: router
+              restconf_supported: false
+              restconf_enabled: false
+              netconf_supported: false
+              netconf_enabled: false
+        iosxe_netconf:
+          vars:
+            ansible_connection: ansible.netcommon.netconf
+            ansible_network_os: cisco.ios.ios
+          hosts:
+            csr1000v_5:
+              ansible_host: 192.168.2.67
+              platform: iosxe
+              device_model: csr1000v
+              role: router
+              ansible_port: 830
+              restconf_supported: true
+              restconf_enabled: false
+              netconf_supported: true
+              netconf_enabled: true
+        nxos:
+          vars:
+            ansible_connection: ansible.netcommon.network_cli
+            ansible_network_os: cisco.nxos.nxos
+          hosts:
+            nxos1:
+              ansible_host: 192.168.2.68
+              platform: nxos
+              device_model: nxosv
+              role: switch
+              restconf_supported: true
+              restconf_enabled: false
+              netconf_supported: false
+              netconf_enabled: false

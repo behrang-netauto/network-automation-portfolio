@@ -28,6 +28,8 @@ examples/**/evidence_pack/**/running_config_backups/*.cfg
 
 # Secrets
 .env
+examples/06_netauto_ecosystem/10_terraform_network_artifact_generator/terraform.tfstate
+examples/06_netauto_ecosystem/10_terraform_network_artifact_generator/.terraform
 
 # Ansible local cache/artifacts
 .ansible/

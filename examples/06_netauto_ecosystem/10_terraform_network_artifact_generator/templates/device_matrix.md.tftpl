@@ -1,0 +1,26 @@
+# Terraform Generated Device Matrix
+
+Site: `${site_name}`
+
+| Device | Platform | Model | Role | Mgmt IP | Execution context | RESTCONF supported | RESTCONF enabled | NETCONF supported | NETCONF enabled |
+|---|---|---|---|---|---|---:|---:|---:|---:|
+%{ for name, device in inventory_devices ~}
+| `${name}` | `${device.platform}` | `${device.device_model}` | `${device.role}` | `${device.mgmt_ip}` | `${device.execution_context}` | `${device.restconf.supported}` | `${device.restconf.enabled}` | `${device.netconf.supported}` | `${device.netconf.enabled}` |
+%{ endfor ~}
+
+## Summary
+
+- Total inventory targets: `${length(inventory_devices)}`
+- Execution contexts: `${join(", ", execution_contexts)}`
+- RESTCONF-supported targets: `${length(restconf_supported_devices)}`
+- RESTCONF-enabled targets: `${length(restconf_devices)}`
+- NETCONF-supported targets: `${length(netconf_supported_devices)}`
+- NETCONF-enabled targets: `${length(netconf_devices)}`
+
+## Notes
+
+This report is generated from the Terraform input data model.
+
+Each device entry represents one logical inventory target with one execution context.
+
+RESTCONF and NETCONF artifacts are generated only from targets where the corresponding protocol is enabled.

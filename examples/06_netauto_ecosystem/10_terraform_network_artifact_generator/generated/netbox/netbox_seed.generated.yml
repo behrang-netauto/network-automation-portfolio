@@ -1,0 +1,82 @@
+---
+site:
+  name: "lab-primary"
+
+devices:
+  - name: "csr1000v_1"
+    role: "router"
+    platform: "iosxe"
+    device_model: "csr1000v"
+    management_ip: "192.168.2.63"
+    execution_context: "ios"
+    custom_fields:
+      restconf_supported: true
+      restconf_enabled: true
+      netconf_supported: true
+      netconf_enabled: false
+  - name: "csr1000v_2"
+    role: "router"
+    platform: "iosxe"
+    device_model: "csr1000v"
+    management_ip: "192.168.2.64"
+    execution_context: "ios"
+    custom_fields:
+      restconf_supported: true
+      restconf_enabled: false
+      netconf_supported: true
+      netconf_enabled: false
+  - name: "csr1000v_3"
+    role: "router"
+    platform: "iosxe"
+    device_model: "csr1000v"
+    management_ip: "192.168.2.65"
+    execution_context: "ios"
+    custom_fields:
+      restconf_supported: true
+      restconf_enabled: true
+      netconf_supported: true
+      netconf_enabled: false
+  - name: "csr1000v_4"
+    role: "router"
+    platform: "iosxe"
+    device_model: "csr1000v"
+    management_ip: "192.168.2.66"
+    execution_context: "ios"
+    custom_fields:
+      restconf_supported: true
+      restconf_enabled: true
+      netconf_supported: true
+      netconf_enabled: false
+  - name: "csr1000v_5"
+    role: "router"
+    platform: "iosxe"
+    device_model: "csr1000v"
+    management_ip: "192.168.2.67"
+    execution_context: "iosxe_netconf"
+    custom_fields:
+      restconf_supported: true
+      restconf_enabled: false
+      netconf_supported: true
+      netconf_enabled: true
+  - name: "iol_r1"
+    role: "router"
+    platform: "ios"
+    device_model: "iol"
+    management_ip: "192.168.2.69"
+    execution_context: "ios"
+    custom_fields:
+      restconf_supported: false
+      restconf_enabled: false
+      netconf_supported: false
+      netconf_enabled: false
+  - name: "nxos1"
+    role: "switch"
+    platform: "nxos"
+    device_model: "nxosv"
+    management_ip: "192.168.2.68"
+    execution_context: "nxos"
+    custom_fields:
+      restconf_supported: true
+      restconf_enabled: false
+      netconf_supported: false
+      netconf_enabled: false

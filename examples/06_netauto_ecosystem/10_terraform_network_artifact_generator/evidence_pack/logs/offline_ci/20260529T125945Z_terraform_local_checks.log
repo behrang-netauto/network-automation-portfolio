@@ -1,0 +1,118 @@
+Run ID: 20260529T125945Z
+Workflow: Terraform local artifact generator checks
+
+== terraform version ==
+Terraform v1.15.4
+on darwin_amd64
++ provider registry.terraform.io/hashicorp/local v2.9.0
+
+Your version of Terraform is out of date! The latest version
+is 1.15.5. You can update by downloading from https://developer.hashicorp.com/terraform/install
+
+== terraform fmt -check ==
+
+== terraform init ==
+[0m[1mInitializing provider plugins found in the configuration...[0m
+- Reusing previous version of hashicorp/local from the dependency lock file
+- Using previously-installed hashicorp/local v2.9.0
+
+[0m[1mInitializing the backend...[0m
+
+[0m[1mInitializing provider plugins found in the state...[0m
+- Reusing previous version of hashicorp/local
+- Using previously-installed hashicorp/local v2.9.0
+
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[0m[32m
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.[0m
+
+== terraform validate ==
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+
+== terraform plan ==
+local_file.restconf_config: Refreshing state... [id=21f79ffd4bf4c7b6bbdefa265d8e10e9df18725b]
+local_file.device_matrix: Refreshing state... [id=2327b2c8a30f06688b03396b92b60ab22385a15d]
+local_file.ansible_inventory: Refreshing state... [id=77b588e3cdd71ad90f138f5a0326035c0dc1aa6e]
+local_file.netbox_seed: Refreshing state... [id=b091d336c426dd8a013157a49ceb3a2aba84bdc4]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+
+== terraform output ==
+artifact_summary = {
+  "execution_contexts" = tolist([
+    "ios",
+    "iosxe_netconf",
+    "nxos",
+  ])
+  "inventory_target_count" = 7
+  "netconf_enabled_targets" = [
+    "csr1000v_5",
+  ]
+  "restconf_enabled_targets" = [
+    "csr1000v_1",
+    "csr1000v_3",
+    "csr1000v_4",
+  ]
+  "site_name" = "lab-primary"
+}
+generated_files = {
+  "ansible_inventory" = "./generated/ansible/inventory.generated.yml"
+  "device_matrix" = "./generated/reports/device_matrix.md"
+  "netbox_seed" = "./generated/netbox/netbox_seed.generated.yml"
+  "restconf_config" = "./generated/restconf/config.generated.yml"
+}
+
+== generated artifacts ==
+generated/ansible/.keep
+generated/ansible/inventory.generated.yml
+generated/netbox/.keep
+generated/netbox/netbox_seed.generated.yml
+generated/reports/.keep
+generated/reports/device_matrix.md
+generated/restconf/.keep
+generated/restconf/config.generated.yml
+
+== generated device matrix preview ==
+# Terraform Generated Device Matrix
+
+Site: `lab-primary`
+
+| Device | Platform | Model | Role | Mgmt IP | Execution context | RESTCONF supported | RESTCONF enabled | NETCONF supported | NETCONF enabled |
+|---|---|---|---|---|---|---:|---:|---:|---:|
+| `csr1000v_1` | `iosxe` | `csr1000v` | `router` | `192.168.2.63` | `ios` | `true` | `true` | `true` | `false` |
+| `csr1000v_2` | `iosxe` | `csr1000v` | `router` | `192.168.2.64` | `ios` | `true` | `false` | `true` | `false` |
+| `csr1000v_3` | `iosxe` | `csr1000v` | `router` | `192.168.2.65` | `ios` | `true` | `true` | `true` | `false` |
+| `csr1000v_4` | `iosxe` | `csr1000v` | `router` | `192.168.2.66` | `ios` | `true` | `true` | `true` | `false` |
+| `csr1000v_5` | `iosxe` | `csr1000v` | `router` | `192.168.2.67` | `iosxe_netconf` | `true` | `false` | `true` | `true` |
+| `iol_r1` | `ios` | `iol` | `router` | `192.168.2.69` | `ios` | `false` | `false` | `false` | `false` |
+| `nxos1` | `nxos` | `nxosv` | `switch` | `192.168.2.68` | `nxos` | `true` | `false` | `false` | `false` |
+
+## Summary
+
+- Total inventory targets: `7`
+- Execution contexts: `ios, iosxe_netconf, nxos`
+- RESTCONF-supported targets: `6`
+- RESTCONF-enabled targets: `3`
+- NETCONF-supported targets: `5`
+- NETCONF-enabled targets: `1`
+
+## Notes
+
+This report is generated from the Terraform input data model.
+
+Each device entry represents one logical inventory target with one execution context.
+
+RESTCONF and NETCONF artifacts are generated only from targets where the corresponding protocol is enabled.
+
+Result: PASS

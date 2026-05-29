@@ -1,0 +1,31 @@
+---
+inventory:
+  source: "terraform-generated"
+  site: "${site_name}"
+
+auth:
+  username_env: "IOSXE_RESTCONF_USER"
+  password_env: "IOSXE_RESTCONF_PASSWORD"
+
+restconf:
+  scheme: "https"
+  verify_ssl: false
+  timeout: 20
+  base_path: "/restconf/data"
+
+execution:
+  per_device_failure_isolation: true
+
+evidence:
+  root: "evidence_pack"
+
+devices:
+%{ for name, device in restconf_devices ~}
+  - name: "${name}"
+    host: "${device.mgmt_ip}"
+    platform: "${device.platform}"
+    device_model: "${device.device_model}"
+    restconf:
+      enabled: ${device.restconf.enabled}
+      port: ${device.restconf.port}
+%{ endfor ~}
