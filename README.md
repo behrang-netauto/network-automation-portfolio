@@ -1,10 +1,8 @@
-# Python Basics for Network Automation
+# Network Automation Portfolio
 
-This repository documents a practical transition from traditional network engineering toward network automation and NetDevOps-style workflows.
-
-It started as a Python learning path for network automation and gradually evolved into a set of hands-on Cisco-oriented labs. The work begins with Python basics and moves toward practical projects involving Ansible, RESTCONF/YANG, NetBox, telemetry, CI/CD, Docker-based monitoring, and Terraform-based artifact generation.
-
-The goal is not to present a production framework. The goal is to document a practical learning and lab-building path through readable code, structured workflows, validation steps, and evidence-backed project outputs.
+This repository documents my practical transition from traditional network engineering toward network automation and NetDevOps-style workflows. It started as a Python learning 
+path for network automation and gradually evolved into a set of hands-on Cisco-oriented labs involving Ansible, RESTCONF/YANG, NetBox concepts, telemetry, CI/CD, Docker-based 
+monitoring, and Terraform-based artifact generation.
 
 ---
 
